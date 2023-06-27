@@ -3,7 +3,7 @@
 def safe_print_integer(value):
     """Print an integer with "{:d}".format()
 
-    Args:
+    Arg:
         value (int): The integer to print
 
     Returns:
