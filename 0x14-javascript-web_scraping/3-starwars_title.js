@@ -1,6 +1,21 @@
 #!/usr/bin/node
 const request = require('request');
-let url = 'http://swapi.co/api/films/' + process.argv[2];
+
+if (process.argv.length !== 3 || isNaN(process.argv[2])) {
+  console.error('Usage: ./3-starwars_title.js <movie_id>');
+  process.exit(1);
+}
+
+const movieId = process.argv[2];
+const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+
 request(url, function (error, response, body) {
-  console.log(error || JSON.parse(body).title);
+  if (error) {
+    console.error(error);
+  } else if (response.statusCode === 200) {
+    const movieData = JSON.parse(body);
+    console.log(movieData.title);
+  } else {
+    console.error(`Error: Could not find a Star Wars movie with ID ${movieId}`);
+  }
 });
